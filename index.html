@@ -16,6 +16,7 @@
             </div>
             <div class="product-info">
                 <h1>{{ product }}</h1>
+<<<<<<< HEAD
                 <p v-if="inStock">In Stock</p>
                 <p v-else>Out of Stock</p>
                 
@@ -31,6 +32,12 @@
                     <p>{{ variant.variantColor }}</p>
                 </div>
                 
+=======
+                <p v-if='inStock'>In Stock</p>
+                <p v-else>Out of Stock</p>
+                <span v-if='onSale'>On Sale!</span>
+                <br>
+>>>>>>> 1db6e06bbacdb7d8e24e0a002d61cb393d4d6ec5
                 <a :href="link" target="_blank">More products like this</a>
             </div>
         </div>
