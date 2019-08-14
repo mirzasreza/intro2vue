@@ -31,9 +31,7 @@ Vue.component('product', {
                 :class="{disabledButton: !inStock}">Add to Cart</button>
             <button @click="removeFromCart">Remove from cart</button>
             
-            <div class="cart">
-                <p>Cart({{ cart }})</p>
-            </div>
+            
             <br />
             <a :href="link" target="_blank">More products like this</a>
         </div>
@@ -63,16 +61,15 @@ Vue.component('product', {
                 }
             ],
             sizes: ["S", "M", "L", "XL"],
-            cart: 0,
             onSale: true
         }
     },
     methods: {
-        addToCart: function () {
-            this.cart += 1
+        addToCart() {
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
         },
-        removeFromCart: function () {
-            this.cart -= 1
+        removeFromCart() {
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId)
         },
         updateProduct(index) {
             this.selectedVariant = index
@@ -130,6 +127,19 @@ Vue.component('product-details', {
 var app = new Vue({
     el: '#app',
     data: {
-        premium: true
+      premium: true,
+      cart: []
+    },
+    methods: {
+      updateCart(id) {
+        this.cart.push(id)
+      },
+      removeItem(id) {
+        for(var i = this.cart.length - 1; i >= 0; i--) {
+          if (this.cart[i] === id) {
+             this.cart.splice(i, 1);
+          }
+        }
+      }
     }
 })
